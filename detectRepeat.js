@@ -21,7 +21,7 @@ async function processLineByLine() {
                 if (obj[`${Afterline.slice(nameIndex+3, nameIndex + 5)}`] === undefined) {
                     obj[`${Afterline.slice(nameIndex+3, nameIndex + 5)}`] = []
                 }
-                obj[`${Afterline.slice(nameIndex+3, nameIndex + 5)}`].push(...Afterline.slice(index + 2, Afterline.length - 1).split(" "))
+                obj[`${Afterline.slice(nameIndex+3, nameIndex + 5)}`].push(...Afterline.slice(index + 2, Afterline.length - 1).toLowerCase().split(" "))
             }
         }
         for (const [key, value] of Object.entries(obj)) {
