@@ -14,7 +14,7 @@ async function processLineByLine() {
         // Note: we use the crlfDelay option to recognize all instances of CR LF
         // ('\r\n') in input.txt as a single line break.
         for await (const line of rl) {
-            if (line.slice(17,20) == " - " && line.slice(20,28)!="Messages") {
+            if (line.slice(17,20) == " - " && line.slice(20,28)!="Messages" && line.indexOf("<Media") == -1) {
                 var nameIndex = line.indexOf(" - ")
                 var Afterline = line.replace(/\s+/g, " "); // trim multiple consecutive spaces down to only one space
                 let index = Afterline.indexOf(": ") // detect :
@@ -25,38 +25,25 @@ async function processLineByLine() {
             }
         }
         for (const [key, value] of Object.entries(obj)) {
-            if(key=="tp"){
-                console.log(value)
-            }
             console.log(`${key}`);
         }
     } catch (e) {
         console.log(e)
     } finally {
         try {
-            var CountWords = {}
+            var countWords = {}
+            var countValue={}
             for (const [key, value] of Object.entries(obj)) {
-                //console.log(`${key}`)
-                value.forEach(function (x) { CountWords[`${key}`][x] = (CountWords[`${key}`][x] || 0) + 1; });
-                Object.entries(CountWords[`${key}`]).sort((a, b) => b[1] - a[1]) //sort by frequency
-                console.log(`Most used 20 word of ${key}: ${Object.entries(CountWords[`${key}`]).sort((a, b) => b[1] - a[1]).slice(0, 20)}`);
+                countValue={}
+                obj[key].forEach(function (x) { countValue[x] = (countValue[x] || 0) + 1; });
+                // Object.entries(countValue).sort((a, b) => b[1] - a[1]) //sort by frequency
+                console.log(`Most used 20 word of ${key}: ${Object.entries(countValue).sort((a, b) => b[1] - a[1]).slice(0, 20)}`);
 
                 console.log(`${key}`);
             }
         } catch (e) {
             console.log(e)
         }
-
-        // var buCounts = {};
-        // var aşCounts = {};
-        // obj.bu.forEach(function (x) { buCounts[x] = (buCounts[x] || 0) + 1; });
-        // obj.aş.forEach(function (x) { aşCounts[x] = (aşCounts[x] || 0) + 1; });
-
-        // let sortedBuCounts = Object.entries(buCounts).sort((a, b) => b[1] - a[1])
-        // let sortedAşCounts = Object.entries(aşCounts).sort((a, b) => b[1] - a[1])
-        // console.log(`Most used 20 word of first person: ${sortedBuCounts.slice(0, 20)}`);
-        // console.log(`Most used 20 word of second person: ${sortedAşCounts.slice(0, 20)}`);
-
     }
 }
 
