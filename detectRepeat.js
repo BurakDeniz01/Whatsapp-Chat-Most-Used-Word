@@ -24,9 +24,6 @@ async function processLineByLine() {
                 obj[`${Afterline.slice(nameIndex + 3, nameIndex + 5)}`].push(...Afterline.slice(index + 2, Afterline.length - 1).toLowerCase().split(" "))
             }
         }
-        for (const [key, value] of Object.entries(obj)) {
-            console.log(`${key}`);
-        }
     } catch (e) {
         console.log(e)
     } finally {
@@ -45,4 +42,3 @@ async function processLineByLine() {
     }
 }
 processLineByLine()
-
