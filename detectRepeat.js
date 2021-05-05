@@ -18,10 +18,10 @@ async function processLineByLine() {
                 var nameIndex = line.indexOf(" - ")
                 var Afterline = line.replace(/\s+/g, " "); // trim multiple consecutive spaces down to only one space
                 let index = Afterline.indexOf(": ") // detect :
-                if (obj[`${Afterline.slice(nameIndex + 3, nameIndex + 5)}`] === undefined) {
-                    obj[`${Afterline.slice(nameIndex + 3, nameIndex + 5)}`] = []
+                if (obj[`${Afterline.slice(nameIndex + 3, index)}`] === undefined) {
+                    obj[`${Afterline.slice(nameIndex + 3, index)}`] = []
                 }
-                obj[`${Afterline.slice(nameIndex + 3, nameIndex + 5)}`].push(...Afterline.slice(index + 2, Afterline.length - 1).toLowerCase().split(" "))
+                obj[`${Afterline.slice(nameIndex + 3, index)}`].push(...Afterline.slice(index + 2, Afterline.length - 1).toLowerCase().split(" "))
             }
         }
     } catch (e) {
